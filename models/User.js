@@ -18,6 +18,13 @@ const userSchema = new Schema({
   },
 });
 
+userSchema.set('toJSON', {
+  transform: function (doc, ret) {
+    delete ret.password;
+    return ret;
+  },
+});
+
 userSchema.pre('save', async function(next) {
   // only hash the password if it has been modified (or is new)
   if(this.isModified('password')) {

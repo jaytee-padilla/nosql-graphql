@@ -30,7 +30,7 @@ const createUser = async (req, res) => {
 const getUsers = async (req, res) => {
   try {
     UserModel.find()
-      .select('-__v -password')
+      .select('-__v')
       .then((allUsers) => {
         res.status(200).json({
           success: true,
@@ -58,7 +58,7 @@ const getUser = async (req, res) => {
     const userId = req.params.id;
 
     UserModel.findById(userId)
-      .select('-__v -password')
+      .select('-__v')
       .then(user => {
         res.status(200).json({
           success: true,
