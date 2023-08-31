@@ -36,6 +36,7 @@ const createFoodPost = async (req, res) => {
 const getAllFoodPosts = async (req, res) => {
   try {
     FoodPostModel.find()
+      .populate('user', '_id email')
       .select('-__v')
       .then(foodPostData => {
         res.status(200).json({
@@ -63,6 +64,7 @@ const getFoodPost = async (req, res) => {
     const foodPostId = req.params.id;
 
     FoodPostModel.findById(foodPostId)
+      .populate('user', '_id email')
       .select('-__v')
       .then(foodPostData => {
         res.status(200).json({
